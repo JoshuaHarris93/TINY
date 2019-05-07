@@ -2,18 +2,22 @@ var express = require("express");
 var app = express();
 var PORT = 8080; 
 
-// var urlDatabase = {
-//   "b2xVn2": "http://www.lighthouselabs.ca",
-//   "9sm5xK": "http://www.google.com"
-// };
-
-
-var urlDatabase = [
-    {long: "http://www.lighthouselabs.ca", short: "#"},
-    {long: "http://www.google.com", short: "#"}
-];
+// urlDatabaseObject = {
+//     bob: "http://google.com",
+//     potato:"https://motherfuckingwebsite.com"
+// }
+var urlDatabase = {
+    h3jk3n: "http://www.lighthouselabs.ca", 
+    l3j4jj: "http://google.com"
+}
   
-
+app.get("/urls/:shortURL", (req, res) => {
+    // console.log(urlDatabase[req.params.shortURL])
+    const shortURL = req.params.shortURL;
+    let templateVars = { shortURL: req.params.shortURL, longURL: urlDatabase[shortURL]};
+    res.render("urls_show", templateVars);
+    // res.send("OK")
+  });
 
 app.get("/urls", (req, res) => {
     let templateVars = { urls: urlDatabase };
@@ -33,10 +37,6 @@ app.get("/", (req, res) => {
 app.get("/urls.json", (req, res) => {
     res.json(urlDatabase);
   });
-
-app.get("/hello", (req, res) => {
-    res.send("<html><body>Hello <b>World</b></body></html>\n");
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
