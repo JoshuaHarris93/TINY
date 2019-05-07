@@ -7,8 +7,15 @@
   <title>TinyApp</title>
 </head>
 <body>
-    <%= shortURL %>
-    <%= longURL %>
+    
+    
+    <%- include('./partials/_header') %>
+    
+    <h3>My URL's</h3>
+   <ul><li><strong><%= shortURL %></strong><strong> - </strong> <%= longURL %> </li>
+   
+</ul>
+
 
 </body>
 </html>
