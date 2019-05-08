@@ -1,6 +1,6 @@
-var express = require("express");
-var app = express();
-var PORT = 8080; 
+const express = require("express");
+const app = express();
+const PORT = 8080; 
 
 
 function generateRandomString() {
@@ -15,7 +15,7 @@ function generateRandomString() {
 //     bob: "http://google.com",
 //     potato:"https://motherfuckingwebsite.com"
 // }
-var urlDatabase = {
+let urlDatabase = {
     h3jk3n: "http://www.lighthouselabs.ca", 
     l3j4jj: "http://google.com"
 }
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.post("/urls", (req, res) => {
     console.log(req.body);  
-    var random = generateRandomstring();
+    let random = generateRandomstring();
     res.send("/urls/:shortURL", "301"); 
     res.redirect (urlDatabase[random], "/urls")       
 
