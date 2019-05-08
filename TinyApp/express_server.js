@@ -20,20 +20,22 @@ let urlDatabase = {
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/urls", (req, res) => {
-    console.log(req.body);  // Log the POST request body to the console
-    res.send("Ok");         // Respond with 'Ok' (we will replace this)
-  });
+// app.post("/urls", (req, res) => {
+//     console.log(req.body);  // Log the POST request body to the console
+//     res.send("Ok");         // Respond with 'Ok' (we will replace this)
+//   });
+
+app.post("/urls/:shortURL/delete", (req, res) => {
+    delete urlDatabase[req.params.shortURL];
+        res.redirect('/urls');
+    
+});
 
 app.get("/u/:shortURL", (req, res) => {
-//   let random = generateRandomString();
+
   const longURL = urlDatabase[req.params.shortURL]
   console.log(req.params);
   res.redirect(longURL);
-
-//   res.send("/urls/:longURL");
-//   let templateVars = { longURL: req.params }
-//   res.status(301).redirect(urlDatabase[req.params.random]);
 
 });
 
@@ -69,7 +71,7 @@ app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-
+// delete shortURL;
 
 
 app.listen(PORT, () => {

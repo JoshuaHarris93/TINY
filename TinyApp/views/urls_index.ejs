@@ -2,14 +2,22 @@
 <head>
   <meta charset = "utf-8">
   <meta name = "viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  
   <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <title>TinyApp</title>
+     
 </head>
+
 <body>
+        <% include partials/_header %>
+    <% for (let key in urls) { %>
+        <li><%= urls[key] %> <form method="POST" action="/urls/<%= key %>/delete">
+            <button style ="background-color: red; padding: 5px;  border-radius: 5px; position: relative;
+            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" 
+            type="submit">Delete</button>
+        </form></li>
+
+    <% } %>
     
-    <% urls.forEach(function(shorten) { %>
-        <li><%= shorten.long %> - <%= shorten.short %></li>
-    <% }) %>
 </body>
 </html>
