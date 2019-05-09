@@ -2,15 +2,24 @@ const express = require("express");
 const app = express();
 const PORT = 8080;
 
+const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 function generateRandomString() {
-  var randomize = Math.random().toString(36).substring(7);
+  let randomize = Math.random().toString(36).substring(7);
   return randomize;
 }
 
 function updateURL(short, long) {
   return urlDatabase[short] = long;
 }
+//search cookie-parser logout
+// 
 
+// DESTRUCTING EX: const {name, email, password} = req.body;
 
 let urlDatabase = {
   h3jk3n: "http://www.lighthouselabs.ca",
@@ -27,8 +36,16 @@ let urlDatabase = {
 
 app.set("view engine", "ejs");
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/login", (req, res) => {
+  let chocChip = req.body.username;
+  res.cookie('username', chocChip);
+  res.redirect('/urls');
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie('username');
+  res.redirect('/urls');
+});
 
 app.post("/urls", (req, res) => {
   let shortURL = generateRandomString();
@@ -62,13 +79,17 @@ app.get("/u/:shortURL", (req, res) => {
 });
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {
+    username: req.cookies["username"]
+  };
+  res.render("urls_new", templateVars);
 });
 
 app.get("/urls/:shortURL", (req, res) => {
   // console.log(urlDatabase[req.params.shortURL])
   const shortURL = req.params.shortURL;
   let templateVars = {
+    username: req.cookies["username"],
     shortURL: shortURL,
     longURL: urlDatabase[shortURL]
   };
@@ -77,13 +98,19 @@ app.get("/urls/:shortURL", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { 
+    username: req.cookies["username"],
+    urls: urlDatabase 
+  };
   res.render("urls_index", templateVars);
 });
 
 
 app.get("/", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { 
+    username: req.cookies["username"],
+    urls: urlDatabase 
+  };
 
   res.render("urls_index", templateVars);
 });

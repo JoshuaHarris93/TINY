@@ -1,6 +1,39 @@
-<h1 style=" font-size: 72px; padding-left: 5px;
+<header>
+<div>
+    
+    
+    <%if (username) { %>
+        <form method="POST" action="logout"><input type="submit" value="logout" class="btn btn-primary">
+            <p>Logged in as <%= username %></p>
+        </form>
+    <% } else { %> 
+        
+
+        <form method="POST" action="/login"> 
+            <input type="text" name="username">
+            <button type="submit">Login</button>
+        </form>
+        
+        
+    <% } %>
+
+</div>
+<div><h1 style=" font-size: 72px;
     background: -webkit-linear-gradient(#ffafbd, #ffc3a0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;">TinyApp</h1>
+</div>
+</header>
 
+<div>
+
+
+</div>
+    
+
+
+
+<body style="padding: 20px">
+
+</body>
 
