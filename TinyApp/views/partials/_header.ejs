@@ -3,16 +3,14 @@
      
     <%if (userObj) { %>
            
-        <form method="POST" action="logout">
+        <form method="POST" action="/logout">
         <input type="submit" value="Logout">
         <p>Logged in as <%= userObj.email %></p>
                
         </form>
     <% } else { %> 
           
-        <a href="/login" class="a">Login</a>
-       
-        <a href="/register" class="a">Register</a>
+        <a href="/login" class="a">Login</a> | <a href="/register" class="a">Register</a>
      <% } %>
 </div>
 
@@ -30,7 +28,7 @@
 }
 
 .a {
-    text-align: center;
+    display: inline-block;
 }
 </style>
 
