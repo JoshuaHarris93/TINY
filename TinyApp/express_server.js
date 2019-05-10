@@ -37,21 +37,23 @@ let urlDatabase = {
   l3j4jj: "http://google.com"
 };
 
-// var keyNameWahtever = 'a new key here'
-// urlDatabase[keyNameWahtever] = 'my new value'
-// let urlDatabase = {
-//   h3jk3n: "http://www.lighthouselabs.ca",
-//   l3j4jj: "http://google.com",
-//   'a new key here': 'my new value'
-// };
-
 app.set("view engine", "ejs");
 
 app.post("/login", (req, res) => {
-  let chocChip = req.body.username;
-  res.cookie("username", chocChip);
+  let { email, password } = req.body;
+  
+  for (let user in users) {
+    if (email === users[user].email) {
+      if (password === users[user].password) {
+        res.cookie("user_id", user);
+      }
+    }
+  }
+  
   res.redirect("/urls");
 });
+//authenticate user - find user with that email, compare passwords. If there is a match, get the user ID.
+//set the user id in the cookies
 
 app.post("/register", (req, res) => {
   let id = generateRandomString();
@@ -80,8 +82,8 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("username");
-  res.redirect("/urls");
+  res.clearCookie("user_id");
+  res.redirect("/login");
 });
 
 app.post("/urls", (req, res) => {
@@ -118,7 +120,7 @@ app.get("/register", (req, res) => {
   let templateVars = {
     userObj: users[req.cookies["user_id"]]
   };
-  res.render("urls_registration");
+  res.render("urls_registration", templateVars);
 });
 
 app.get("/u/:shortURL", (req, res) => {

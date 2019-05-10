@@ -8,14 +8,18 @@
 </head>
 
 <body>
-    
-        
-             <form method="POST" action="/register">
-                <p>Username</p><input type="email" name="email">
-                <p>Password</p><input type="password" name="password">
-                <button style ="background-color: blue; padding: 5px;  border-radius: 5px; position: relative;
-            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px"  
-            type="submit">Submit</button>
+  <% include partials/_header %>
+  <form method="POST" action="/register">
+  <p>Username</p><input type="email" name="email">
+  <p>Password</p><input type="password" name="password">
+  <button style ="background-color: blue; 
+                  padding: 5px;  
+                  border-radius: 5px; 
+                  position: relative;
+                  top: 6px; 
+                  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); 
+                  color: white; font-size: 15px"  
+          type="submit">Register</button>
   
             </form>
 
