@@ -112,14 +112,13 @@ app.post("/urls", (req, res) => {
 //MOST RECENTLY CHANGED (Users Can Only Edit or Delete Their Own URLs)
 
 app.post("/urls/:shortURL/delete", (req, res) => {
-  for (let id in urlDatabase) {
-  if (urlDatabase[id].userID === req.cookies["user_id"]) {
+  
+  if (urlDatabase[req.params.shortURL].userID === req.cookies["user_id"]) {
   delete urlDatabase[req.params.shortURL];
   } else {
     res.send("You are not logged in!");
   }
   res.redirect("/urls");
-  }
 });
 
 app.post("/urls/:shortURL/update", (req, res) => {
@@ -132,7 +131,7 @@ app.post("/urls/:shortURL/update", (req, res) => {
   // res.redirect('/urls', longURL);
   res.redirect("/urls");
 });
-
+//askbfajsf
 app.get("/login", (req, res) => {
   let templateVars = {
     userObj: users[req.cookies["user_id"]]
