@@ -1,39 +1,34 @@
-<header>
-<div>
+
+<div class="header"><h1 style=" font-size: 72px;
+    background: -webkit-linear-gradient(#ffafbd, #ffc3a0);
+    -webkit-background-clip: text; height: 100px;
+    -webkit-text-fill-color: transparent; ">TinyApp</h1>
+     <a href="/login">Login</a>
+</div>
+
+<style>
+
+
+</style>
+<div style="height: 75px; padding: 10px;">
     
-    
-    <%if (username) { %>
+    <%if (userObj) { %>
         <form method="POST" action="logout"><input type="submit" value="logout" class="btn btn-primary">
-            <p>Logged in as <%= username %></p>
+            <p>Logged in as <%= userObj.email %></p>
+           
         </form>
     <% } else { %> 
-        
-
-        <form method="POST" action="/login"> 
-            <input type="text" name="username">
-            <button type="submit">Login</button>
-        </form>
+      
+        <a href="/login">Login</a>
+        <p></p>
+        <a href="/register" >Register</a>
         
         
     <% } %>
 
 </div>
-<div><h1 style=" font-size: 72px;
-    background: -webkit-linear-gradient(#ffafbd, #ffc3a0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;">TinyApp</h1>
-</div>
-</header>
-
-<div>
-
-
-</div>
     
-
-
-
-<body style="padding: 20px">
+<body style="padding: 16px;">
 
 </body>
 
