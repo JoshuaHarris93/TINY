@@ -1,39 +1,35 @@
 <div class="header">
-    <h1 class="title">TinyApp</h1>
-     
-    <%if (userObj) { %>
-           
-        <form method="POST" action="/logout">
-        <input type="submit" value="Logout">
-        <p>Logged in as <%= userObj.email %></p>
-               
-        </form>
-    <% } else { %> 
-          
-        <a href="/login" class="a">Login</a> | <a href="/register" class="a">Register</a>
-     <% } %>
+  <h1 class="title">TinyApp</h1>
+
+  <%if (userObj) { %>
+
+  <form method="POST" action="/logout">
+    <input type="submit" value="Logout" />
+    <p>Logged in as <%= userObj.email %></p>
+  </form>
+  <% } else { %>
+
+  <a href="/login" class="a">Login</a> |
+  <a href="/register" class="a">Register</a>
+  <% } %>
 </div>
 
-
 <style>
-.title {
+  .title {
     font-size: 72px;
     background: -webkit-linear-gradient(#ffafbd, #ffc3a0);
-    -webkit-background-clip: text; height: 100px;
+    -webkit-background-clip: text;
+    height: 100px;
     -webkit-text-fill-color: transparent;
-}
+  }
 
-.header {
+  .header {
     padding: 10px;
-}
+  }
 
-.a {
+  .a {
     display: inline-block;
-}
+  }
 </style>
 
-
-<body style="padding: 16px;">
-
-</body>
-
+<body style="padding: 16px;"></body>

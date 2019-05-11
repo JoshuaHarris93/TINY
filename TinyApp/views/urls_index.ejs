@@ -1,39 +1,57 @@
-<html lang = "en">
-<head>
-  <meta charset = "utf-8">
-  <meta name = "viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <title>TinyApp</title>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <title>TinyApp</title>
+  </head>
+
+  <body>
     <% include partials/_header %>
-    
-  
-        <a href="/urls/new"><button style ="background-color: blue; padding-bottom: 5px;  border-radius: 5px; position: relative;
-            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px"  
-            type="button">Create new</button></a>
-            <p></p>
 
-            <h3>My URL's:</h3>
+    <a href="/urls/new"
+      ><button
+        style="background-color: blue; padding-bottom: 5px;  border-radius: 5px; position: relative;
+            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px"
+        type="button"
+      >
+        Create new
+      </button></a
+    >
+    <p></p>
+
+    <h3>My URL's:</h3>
     <% for (let key of urlShow) { %>
-        <li><%= urls[key].longURL %> <form method="POST" action="/urls/<%= key %>/delete">
+    <li>
+      <%= urls[key].longURL %>
+      <form method="POST" action="/urls/<%= key %>/delete">
+        <a href="/urls/<%= key %>"
+          ><button
+            style="background-color: grey; padding: 5px;  border-radius: 5px; position: relative;
+            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px"
+            type="button"
+          >
+            Edit
+          </button></a
+        >
 
-            <a href="/urls/<%= key %>"><button style ="background-color: grey; padding: 5px;  border-radius: 5px; position: relative;
-            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px" 
-            type="button">Edit</button></a>
-            
-            <button style ="background-color: red; padding: 5px;  border-radius: 5px; position: relative;
-            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px" 
-            type="submit">Delete</button>
-            
-        </form></li>
+        <button
+          style="background-color: red; padding: 5px;  border-radius: 5px; position: relative;
+            top: 6px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); color: white; font-size: 15px"
+          type="submit"
+        >
+          Delete
+        </button>
+      </form>
+    </li>
 
     <% } %>
-
-     
-    
-    
-</body>
+  </body>
 </html>
