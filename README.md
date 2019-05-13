@@ -7,7 +7,7 @@ TinyApp is a full-stack application developed using express and node. It require
 Screenshots include the login page and the main URL's page with example URL's.
 
 !["Login page: "](https://github.com/JoshuaHarris93/TINY/blob/master/docs/login_page.png?raw=true)
-![URL's page: ](https://github.com/JoshuaHarris93/TINY/blob/master/docs/urls_page.png?raw=true)
+!["URL's page: "](https://github.com/JoshuaHarris93/TINY/blob/master/docs/urls_page.png?raw=true)
 
 ## Dependancies
 

@@ -24,7 +24,7 @@ function generateRandomString() {
 
 //Updates short URL
 function updateURL(short, long) {
-  return (urlDatabase[short] = long);
+  return (urlDatabase[short].longURL = long);
 }
 
 //Loops through urlDatabase to compare userID with the id passed into the req.body (input field)
@@ -71,6 +71,7 @@ app.post("/login", (req, res) => {
       }
     }
   }
+  res.status(403).send("Error: wrong username or password")
 });
 
 /* 
@@ -175,24 +176,40 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/urls/:shortURL", (req, res) => {
+  let user = users[req.session.user_id];
+  if(!user) {
+    res.status(403).send("Forbidden");
+    return;
+  }
+  
   const shortURL = req.params.shortURL;
   let templateVars = {
     userObj: users[req.session.user_id],
     shortURL: shortURL,
     longURL: urlDatabase[shortURL].longURL
   };
+
+  
+
   res.render("urls_show", templateVars);
+  
 });
 
 app.get("/urls", (req, res) => {
+  let user = users[req.session.user_id];
   let templateVars = {
     userObj: users[req.session.user_id],
     urls: urlDatabase,
     urlShow: urlsForUser(req.session.user_id)
   };
-
+  
+  if(!user) {
+    res.status(403).send("Forbidden");
+    return;
+  }
   res.render("urls_index", templateVars);
 });
+
 
 app.get("/", (req, res) => {
   let templateVars = {
