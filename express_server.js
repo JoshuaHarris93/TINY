@@ -209,10 +209,11 @@ app.get("/urls", (req, res) => {
   };
   
   if(!user) {
-    res.status(403).send("Forbidden");
+    res.redirect("/login");
     return;
-  }
+  } else {
   res.render("urls_index", templateVars);
+  }
 });
 
 
