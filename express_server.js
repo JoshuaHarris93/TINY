@@ -14,6 +14,23 @@ app.use(
     keys: ["lighthouse"]
   })
 );
+
+//Collects user data upon registration
+const users = {
+  sp256l: {
+    id: "sp256l",
+    email: "rebb@gmail.com",
+    hashedPassword:
+      "$2b$10$LdtPpIe1D4T/pMPY0/ghXuvXjFDfjkErF/0I1NkEIWJ9efIivml2y"
+  }
+};
+
+//contains a database of urls (hardcoded) with a key that has been randomly generated using or generateRandomString function
+const urlDatabase = {
+  h3jk3n: { longURL: "http://www.lighthouselabs.ca", userID: "user2RandomID" },
+  l3j4jj: { longURL: "http://google.com", userID: "userRandomID" }
+};
+
 //Generate a random string for userID upon registration
 function generateRandomString() {
   let randomize = Math.random()
@@ -37,22 +54,6 @@ function urlsForUser(id) {
   }
   return arr;
 }
-
-//Collects user data upon registration
-const users = {
-  sp256l: {
-    id: "sp256l",
-    email: "rebb@gmail.com",
-    hashedPassword:
-      "$2b$10$LdtPpIe1D4T/pMPY0/ghXuvXjFDfjkErF/0I1NkEIWJ9efIivml2y"
-  }
-};
-
-//contains a database of urls (hardcoded) with a key that has been randomly generated using or generateRandomString function
-const urlDatabase = {
-  h3jk3n: { longURL: "http://www.lighthouselabs.ca", userID: "user2RandomID" },
-  l3j4jj: { longURL: "http://google.com", userID: "userRandomID" }
-};
 
 //allows you to connect your express server to front end templates
 app.set("view engine", "ejs");
@@ -186,8 +187,6 @@ app.get("/urls/:shortURL", (req, res) => {
 
   if(myUrls[shortURL]) {
 
-  
-  
     let templateVars = {
       userObj: users[req.session.user_id],
       shortURL: shortURL,
