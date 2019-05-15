@@ -181,25 +181,31 @@ app.get("/urls/:shortURL", (req, res) => {
     res.status(403).send("Forbidden");
     return;
   }
-  
+  const myUrls = urlsForUser(req.session.user_id)
   const shortURL = req.params.shortURL;
-  let templateVars = {
-    userObj: users[req.session.user_id],
-    shortURL: shortURL,
-    longURL: urlDatabase[shortURL].longURL
-  };
+
+  if(myUrls[shortURL]) {
 
   
-
-  res.render("urls_show", templateVars);
   
+    let templateVars = {
+      userObj: users[req.session.user_id],
+      shortURL: shortURL,
+      longURL: urlDatabase[shortURL].longURL
+    };
+
+
+    res.render("urls_show", templateVars);
+  }
+  else {
+    res.status(403).send("Forbidden");
+  }
 });
 
 app.get("/urls", (req, res) => {
   let user = users[req.session.user_id];
   let templateVars = {
     userObj: users[req.session.user_id],
-    urls: urlDatabase,
     urlShow: urlsForUser(req.session.user_id)
   };
   

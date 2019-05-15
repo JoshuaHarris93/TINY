@@ -2,6 +2,10 @@
 
 TinyApp is a full-stack application developed using express and node. It requires you to register with a username and password - once you are logged in, you can generate short URL's that link to the relevant long URL.
 
+## Get Started
+
+Make sure to `npm install` before running the app with `npm start`.
+
 ## Screenshots
 
 Screenshots include the login page and the main URL's page with example URL's.
