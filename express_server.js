@@ -16,20 +16,10 @@ app.use(
 );
 
 //Collects user data upon registration
-const users = {
-  sp256l: {
-    id: "sp256l",
-    email: "rebb@gmail.com",
-    hashedPassword:
-      "$2b$10$LdtPpIe1D4T/pMPY0/ghXuvXjFDfjkErF/0I1NkEIWJ9efIivml2y"
-  }
-};
+const users = {};
 
 //contains a database of urls (hardcoded) with a key that has been randomly generated using or generateRandomString function
-const urlDatabase = {
-  h3jk3n: { longURL: "http://www.lighthouselabs.ca", userID: "user2RandomID" },
-  l3j4jj: { longURL: "http://google.com", userID: "userRandomID" }
-};
+const urlDatabase = {};
 
 //Generate a random string for userID upon registration
 function generateRandomString() {
@@ -46,13 +36,13 @@ function updateURL(short, long) {
 
 //Loops through urlDatabase to compare userID with the id passed into the req.body (input field)
 function urlsForUser(id) {
-  let arr = [];
+  let outputDb = {};
   for (const sURL in urlDatabase) {
     if (urlDatabase[sURL].userID === id) {
-      arr.push(sURL);
+      outputDb[sURL] = urlDatabase[sURL];
     }
   }
-  return arr;
+  return outputDb;
 }
 
 //allows you to connect your express server to front end templates
@@ -72,7 +62,7 @@ app.post("/login", (req, res) => {
       }
     }
   }
-  res.status(403).send("Error: wrong username or password")
+  res.status(403).send("Error: wrong username or password");
 });
 
 /* 
@@ -161,8 +151,8 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/u/:shortURL", (req, res) => {
-  const longURL = urlDatabase[req.params.shortURL].longURL;
-  res.redirect(longURL);
+  const long = urlDatabase[req.params.shortURL].longURL;
+  res.redirect(long);
 });
 
 app.get("/urls/new", (req, res) => {
@@ -178,25 +168,22 @@ app.get("/urls/new", (req, res) => {
 
 app.get("/urls/:shortURL", (req, res) => {
   let user = users[req.session.user_id];
-  if(!user) {
+  if (!user) {
     res.status(403).send("Forbidden");
     return;
   }
-  const myUrls = urlsForUser(req.session.user_id)
+  const myUrls = urlsForUser(req.session.user_id);
   const shortURL = req.params.shortURL;
 
-  if(myUrls[shortURL]) {
-
+  if (myUrls[shortURL]) {
     let templateVars = {
       userObj: users[req.session.user_id],
       shortURL: shortURL,
       longURL: urlDatabase[shortURL].longURL
     };
 
-
     res.render("urls_show", templateVars);
-  }
-  else {
+  } else {
     res.status(403).send("Forbidden");
   }
 });
@@ -207,23 +194,18 @@ app.get("/urls", (req, res) => {
     userObj: users[req.session.user_id],
     urlShow: urlsForUser(req.session.user_id)
   };
-  
-  if(!user) {
+  console.log(templateVars.urlShow)
+
+  if (!user) {
     res.redirect("/login");
     return;
   } else {
-  res.render("urls_index", templateVars);
+    res.render("urls_index", templateVars);
   }
 });
 
-
 app.get("/", (req, res) => {
-  let templateVars = {
-    username: req.session.user_id,
-    urls: urlDatabase
-  };
-
-  res.render("urls_index", templateVars);
+  res.redirect("/urls");
 });
 
 app.get("/urls.json", (req, res) => {
