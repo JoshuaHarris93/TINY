@@ -15,9 +15,9 @@ Screenshots include the login page and the main URL's page with example URL's.
 
 ## Dependancies
 
-"bcrypt": "2.0.0",
-"body-parser": "^1.19.0",
-"cookie-parser": "^1.4.4",
-"cookie-session": "^1.3.3",
-"ejs": "^2.6.1",
-"express": "^4.16.4"
+- bcrypt: "2.0.0",
+- body-parser: "^1.19.0",
+- cookie-parser: "^1.4.4",
+- cookie-session: "^1.3.3",
+- ejs: "^2.6.1",
+- express: "^4.16.4"

@@ -75,14 +75,14 @@ app.post("/register", (req, res) => {
   const password = req.body.password;
   const hashedPassword = bcrypt.hashSync(password, 10);
   let email = req.body.email;
-
+  console.log(users)
   if (!email || !password) {
-    res.redirect(400);
+    return res.send("ERROR: Enter an email and password");
   }
 
-  for (let user in users) {
-    if (email === user.email) {
-      res.redirect(400);
+  for (let key in users) {
+    if (email === users[key].email) {
+      return res.send("ERROR: User with the provided email already exists");
     }
   }
 
@@ -139,8 +139,14 @@ app.get("/login", (req, res) => {
   let templateVars = {
     userObj: users[req.session.user_id]
   };
+  
+  if (req.session.user_id) {
+    res.redirect("/urls");
+  }
+  else {
   res.render("urls_login", templateVars);
-  res.redirect("/urls");
+  }
+  
 });
 
 app.get("/register", (req, res) => {
